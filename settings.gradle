@@ -1,0 +1,20 @@
+pluginManagement {
+    plugins {
+        id 'groovy'
+        id 'io.spring.dependency-management' version '1.0.6.RELEASE'
+        id 'net.ltgt.apt-idea' version '0.21'
+        id 'com.google.cloud.tools.jib' version '1.5.1'
+        id 'com.adarshr.test-logger' version '1.7.0'
+
+        id 'com.github.psxpaul.execfork' version '0.1.12'
+    }
+}
+
+rootProject.name = 'demo-tracing-through-logs'
+
+include (
+    "tracing-with-logback-json-classic",
+    "mn-fake-identity",
+    "mn-fake-points",
+    "tracing-from-logs",
+)

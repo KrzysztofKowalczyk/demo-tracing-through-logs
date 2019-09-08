@@ -1,0 +1,10 @@
+micronaut:
+    application:
+        name: identity-service
+    server:
+        port: 8086
+tracing:
+    jaeger:
+        enabled: true
+        sampler:
+            probability: 1

@@ -1,0 +1,9 @@
+micronaut:
+    application:
+        name: points-service
+
+tracing:
+    jaeger:
+        enabled: true
+        sampler:
+            probability: 1

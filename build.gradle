@@ -1,0 +1,11 @@
+
+ext.micronautVersion = "1.2.1"
+ext.groovyVersion = "2.5.8"
+
+
+task clickEnterToCloseServices {
+    doFirst {
+        System.out.println("Click enter to stop services.")
+        System.in.newReader().readLine()
+    }
+}
