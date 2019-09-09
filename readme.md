@@ -1,9 +1,13 @@
 # Demo of tracing with logs
 
-This code run 2 separate can dump tracing info to logs in json format that later can be 
-read from file / Splunk / ElasticSearch and imported to Jaeger.
+This code run 2 separate service, where one is depending on another.
+Both service dump tracing information to log file in json format.
+This file is read by another process which parse it and exports traces to Jaeger through HTTP port.
+
+It is a PoC and could be extended to import data from Splunk or ElasticSearch instead.
 
 # How to run the demo 
+
 First run:
 
 ```sh
@@ -19,8 +23,7 @@ docker run -d --name jaeger \
    jaegertracing/all-in-one:1.14
 ```
 
-This runs all-in--one Jaeger in memory docker image that can be accessed
-at http://localhost:16686/search
+This runs all-in-one Jaeger in memory docker image that can be accessed at http://localhost:16686/search
 
 Next run:
 
@@ -29,19 +32,18 @@ Next run:
 ```
 
 Which would start 3 separate processes:
-- fake points service - which you can call with http://localhost:8080/points/{string access token}
-- fake identity service - which you can call with http://localhost:8086/validate/{string access token}
-- groovy script uploading traces 
+- a fake points service - which you can call with http://localhost:8080/points/someAccessToken
+- a fake identity service - which you can call with http://localhost:8086/validate/anotherAccessToken
+- a groovy script continously uploading traces from a file
 
 Gradle will keep those processes running until enter is clicked.
-You can call services api and see how results look like Jaeger.
+You can call services api (try the links above) and see how the results look like in Jaeger.
 Fortunately Identity is really relaxed and will accept any access token. 
 
-The services will append traces to log file `log/trace.log` in root folder.
-Groovy script will be loading those traces from the same file and uploading it to jaeger docker image.
+Services will append traces to log file `log/trace.log` in root folder.
+A Groovy script will be loading traces from that file and uploading it to Jaeger thrift http endpoint on localhost:14268.
 
-Because Micronaut provides Jaeger integration, context is properly propagated through http clients and http servers without 
-any extra effort. Some frameworks and protocols require manual context propagation.
+Because Micronaut provides Jaeger integration, context is properly propagated between those services through http calls without any extra effort. Some frameworks and protocols require manual context propagation.
 
 ## Notes 
 
