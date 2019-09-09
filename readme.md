@@ -54,10 +54,10 @@ Because Micronaut provides Jaeger integration, context is properly propagated be
 
 ## Todo
 
-- add process data
-- add tags
 - move to OpenTelemetry once available
     - it has implementation, not only api and would allow to use standard classes instead of Jaeger
     - OpenTelemetry has nice concept of exporters which should work well for that
     - OpenTelemetry has shim for OpenTracing
     - OpenTelemetry has Jaeger protobuf exporter
+ - Splunk based exporter ?
+ - Splunk based Jaeger UI ?
