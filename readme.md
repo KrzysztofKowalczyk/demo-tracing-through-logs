@@ -28,7 +28,7 @@ This runs all-in-one Jaeger in memory docker image that can be accessed at http:
 Next run:
 
 ```sh
-./gradlew startServices
+./gradlew startService
 ```
 
 Which would start 3 separate processes:
