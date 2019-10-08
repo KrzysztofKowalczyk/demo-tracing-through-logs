@@ -19,7 +19,7 @@ import io.jaegertracing.thriftjava.SpanRefType
  * Running this script multiple times over the same content would cause duplicates.
  */
 @CompileStatic
-class ScrapTracesFromLogs {
+class ScrapeTracesFromLogs {
     static JsonSlurper slurper = new JsonSlurper()
         .setType(JsonParserType.INDEX_OVERLAY)
 

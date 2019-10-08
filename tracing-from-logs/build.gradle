@@ -19,7 +19,7 @@ dependencies {
 task startService(type: com.github.psxpaul.task.JavaExecFork){
     classpath = sourceSets.main.runtimeClasspath
     workingDir = parent.projectDir
-    main = "demo.export.ScrapTracesFromLogs"
+    main = "demo.export.ScrapeTracesFromLogs"
     //stopAfter = parent.tasks.findByName("clickEnterToCloseServices")
     waitForPort = 8080
 
