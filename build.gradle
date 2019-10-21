@@ -2,6 +2,28 @@
 ext.micronautVersion = "1.2.1"
 ext.groovyVersion = "2.5.8"
 
+task startService {
+    doFirst {
+        def failed = true
+        def i = 0
+        while (failed) {
+            try {
+                failed = false
+                // call one of the services to have some data
+                new URL("http://localhost:8080/points/some_access_token").text
+                new URL("http://localhost:8080/points/another_access_token").text
+                new URL("http://localhost:8086/validateToken/direct_call_to_identity_token").text
+            } catch (e) {
+                e.printStackTrace()
+                i++
+                failed = true
+                Thread.sleep(500)
+                assert i < 20 : "Calling services failed to many times"
+            }
+        }
+    }
+    mustRunAfter(":mn-fake-identity:startService", ":mn-fake-points:startService")
+}
 
 task clickEnterToCloseServices {
     doFirst {

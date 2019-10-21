@@ -33,15 +33,18 @@ Next run:
 
 Which would start 3 separate processes:
 - a fake points service - which you can call with http://localhost:8080/points/someAccessToken
-- a fake identity service - which you can call with http://localhost:8086/validate/anotherAccessToken
+- a fake identity service - which you can call with http://localhost:8086/validateToken/anotherAccessToken
 - a groovy script continously uploading traces from a file
+
+It will keep running until Enter is clicked.
+Some data should be now available on http://localhost:16686/search.
 
 Gradle will keep those processes running until enter is clicked.
 You can call services api (try the links above) and see how the results look like in Jaeger.
 Fortunately Identity is really relaxed and will accept any access token. 
 
 Services will append traces to log file `log/trace.log` in root folder.
-A Groovy script will be loading traces from that file and uploading it to Jaeger thrift http endpoint on localhost:14268.
+A Groovy script will be loading traces from that file and uploading it to Jaeger thrift http endpoint on port 14268.
 
 Because Micronaut provides Jaeger integration, context is properly propagated between those services through http calls without any extra effort. Some frameworks and protocols require manual context propagation.
 

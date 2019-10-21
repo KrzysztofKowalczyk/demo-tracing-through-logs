@@ -34,8 +34,8 @@ dependencies {
     compile 'io.jaegertracing:jaeger-thrift:1.0.0'
     compile project(':tracing-with-logback-json-classic')
 
-    compileOnly 'io.micronaut:micronaut-inject-groovy'
     compileOnly 'io.micronaut:micronaut-inject-java'
+    compileOnly 'io.micronaut:micronaut-inject-groovy'
 
     runtime 'ch.qos.logback:logback-classic:1.2.3'
 
