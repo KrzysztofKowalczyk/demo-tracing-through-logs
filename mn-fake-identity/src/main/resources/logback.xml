@@ -12,6 +12,7 @@
 
     <appender name="TRACE" class="ch.qos.logback.core.FileAppender">
         <file>log/trace.log</file>
+        <immediateFlush>true</immediateFlush>
         <encoder class="ch.qos.logback.core.encoder.LayoutWrappingEncoder">
             <layout class="demo.export.MapJsonLayout">
                 <jsonFormatter class="ch.qos.logback.contrib.jackson.JacksonJsonFormatter" />
@@ -20,7 +21,7 @@
         </encoder>
     </appender>
 
-    <logger name="demo.export.LogTraceSender" level="INFO">
+    <logger name="demo.export.LogTraceReporter" level="INFO">
         <appender-ref ref="TRACE" />
     </logger>
 </configuration>

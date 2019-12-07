@@ -5,7 +5,7 @@ import groovy.transform.CompileStatic
 import io.jaegertracing.internal.JaegerSpan
 import io.jaegertracing.internal.Reference
 import io.jaegertracing.internal.exceptions.SenderException
-import io.jaegertracing.spi.Sender
+import io.jaegertracing.spi.Reporter
 import io.jaegertracing.thriftjava.SpanRefType
 import io.opentracing.References
 import org.slf4j.Logger
@@ -13,25 +13,19 @@ import org.slf4j.LoggerFactory
 
 @Canonical
 @CompileStatic
-class LogTraceSender implements Sender {
-    static final Logger LOG = LoggerFactory.getLogger(LogTraceSender)
+class LogTraceReporter implements Reporter {
+    static final Logger LOG = LoggerFactory.getLogger(LogTraceReporter)
 
     @Override
-    int append(JaegerSpan span) throws SenderException {
+    void report(JaegerSpan span) throws SenderException {
         LOG.info(null, [
             jaegerSpan: extractFields(span)
         ])
-        return 1
     }
 
     @Override
-    int flush() throws SenderException {
-        return 0
-    }
-
-    @Override
-    int close() throws SenderException {
-        return 0
+    void close() throws SenderException {
+        // empty
     }
 
     Map extractFields(JaegerSpan span) {

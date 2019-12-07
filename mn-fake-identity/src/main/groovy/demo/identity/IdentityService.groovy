@@ -1,9 +1,10 @@
 package demo.identity
 
-import demo.export.LogTraceSender
+import demo.export.LogTraceReporter
 import groovy.transform.CompileStatic
-import io.jaegertracing.Configuration
-import io.jaegertracing.spi.Sender
+import io.jaegertracing.internal.samplers.ConstSampler
+import io.jaegertracing.spi.Reporter
+import io.jaegertracing.spi.Sampler
 import io.micronaut.context.annotation.Bean
 import io.micronaut.context.annotation.Factory
 import io.micronaut.runtime.Micronaut
@@ -17,14 +18,12 @@ class IdentityService {
     }
 
     @Bean
-    Configuration.SenderConfiguration jaegerSenderConfiguration() {
-        def sender = new LogTraceSender()
+    Reporter reporter() {
+        new LogTraceReporter()
+    }
 
-        new Configuration.SenderConfiguration() {
-            @Override
-            Sender getSender() {
-                sender
-            }
-        }
+    @Bean
+    Sampler sampler(){
+        new ConstSampler(true)
     }
 }
